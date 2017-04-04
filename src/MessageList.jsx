@@ -6,11 +6,12 @@ class MessageList extends Component {
   render() {
     return (
       <main className="messages">
-        <Message />
-        <SystemMessage />
+        {this.props.messages.map( message => <Message key={message.id} id={message.id} username={message.username} content={message.content}/>)}
       </main>
     )
   }
 }
 
 export default MessageList;
+
+//TODO: so what do I do with the system messages O.o
