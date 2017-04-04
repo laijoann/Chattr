@@ -38,9 +38,18 @@ class App extends Component {
     return (
       <div>
         <MessageList messages={this.state.messages}/>
-        <ChatBar name={this.state.currentUser.name}/>
+        <ChatBar name={this.state.currentUser.name} handleKeyUp={this.handleKeyUp.bind(this)}/>
       </div>
     );
+  }
+  handleKeyUp(e) {
+    if (e.keyCode === 13) {
+      const enteredMessage = {id: this.state.keyNum, username: this.state.currentUser.name, content: e.target.value}
+      this.state.keyNum += 1
+      e.target.value = ""
+      const messages = this.state.messages.concat(enteredMessage)
+      this.setState({messages: messages})
+    }
   }
 }
 export default App;
