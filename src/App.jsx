@@ -6,7 +6,7 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      currentUser: { name: "Bob" },
+      currentUser: { name: "Anonymous" },
       messages: []
     }
   }
@@ -14,8 +14,16 @@ class App extends Component {
     console.log("componentDidMount <App />");
     this.socket = new WebSocket("ws://172.46.3.111:3001")
     this.socket.onmessage = (newMsg) => {
-      const messages = this.state.messages.concat(JSON.parse(newMsg.data));
-      this.setState({messages: messages});
+      const receivedMsg = JSON.parse(newMsg.data)
+      switch (receivedMsg.type) {
+        case 'content':
+          const messages = this.state.messages.concat(receivedMsg.text);
+          this.setState({messages: messages});
+          break;
+        case 'username':
+          this.state.currentUser = { name: receivedMsg.text }
+          break;
+      }
     }
     console.log(this.state.messages)
   }
@@ -41,10 +49,12 @@ class App extends Component {
   }
   handleNewUsername(e) {
     if (e.keyCode === 13) {
-      console.log(e)
       const enteredUsername = e.target.value
-      this.socket.send(JSON.stringify(enteredUsername))
-      e.target.value = "";
+      const toSend = {
+        type: 'username',
+        text: enteredUsername
+      }
+      this.socket.send(JSON.stringify(toSend))
     }
   }
 }
