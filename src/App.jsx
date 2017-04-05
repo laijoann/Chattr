@@ -23,7 +23,7 @@ class App extends Component {
     return (
       <div>
         <MessageList messages={this.state.messages}/>
-        <ChatBar name={this.state.currentUser.name} handleNewContent={this.handleNewContent.bind(this)}/>
+        <ChatBar name={this.state.currentUser.name} handleNewContent={this.handleNewContent.bind(this)} handleNewUsername={this.handleNewUsername.bind(this)}/>
       </div>
     );
   }
@@ -31,7 +31,19 @@ class App extends Component {
     let currUser = this.state.currentUser.name;
     if (e.keyCode === 13) {
       const enteredMessage = {username: currUser, content: e.target.value}
-      this.socket.send(JSON.stringify(enteredMessage));
+      const toSend = {
+        type: 'content',
+        text: enteredMessage
+      }
+      this.socket.send(JSON.stringify(toSend));
+      e.target.value = "";
+    }
+  }
+  handleNewUsername(e) {
+    if (e.keyCode === 13) {
+      console.log(e)
+      const enteredUsername = e.target.value
+      this.socket.send(JSON.stringify(enteredUsername))
       e.target.value = "";
     }
   }
