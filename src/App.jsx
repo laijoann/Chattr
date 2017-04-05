@@ -6,46 +6,33 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      keyNum: 4,
       currentUser: { name: "Bob" },
-      messages: [
-        {
-          id: 1,
-          username: "Bob",
-          content: "Has anyone seen my marbles?",
-        },
-        {
-          id: 2,
-          username: "Anonymous",
-          content: "No, I think you lost them. You lost your marbles Bob. You lost them for good."
-        }
-      ]
+      messages: []
     }
   }
   componentDidMount() {
     console.log("componentDidMount <App />");
-    setTimeout(() => {
-      console.log("Simulating incoming message");
-      const newMessage = {id: 3, username: "Michelle", content: "Hello there!"};
-      const messages = this.state.messages.concat(newMessage)
-      this.setState({messages: messages})
-    }, 3000);
+    this.socket = new WebSocket("ws://172.46.3.111:3001")
+    this.socket.onmessage = (newMsg) => {
+      const messages = this.state.messages.concat(JSON.parse(newMsg.data));
+      this.setState({messages: messages});
+    }
+    console.log(this.state.messages)
   }
   render() {
     return (
       <div>
         <MessageList messages={this.state.messages}/>
-        <ChatBar name={this.state.currentUser.name} handleKeyUp={this.handleKeyUp.bind(this)}/>
+        <ChatBar name={this.state.currentUser.name} handleNewContent={this.handleNewContent.bind(this)}/>
       </div>
     );
   }
-  handleKeyUp(e) {
+  handleNewContent(e) {
+    let currUser = this.state.currentUser.name;
     if (e.keyCode === 13) {
-      const enteredMessage = {id: this.state.keyNum, username: this.state.currentUser.name, content: e.target.value}
-      this.state.keyNum += 1
-      e.target.value = ""
-      const messages = this.state.messages.concat(enteredMessage)
-      this.setState({messages: messages})
+      const enteredMessage = {username: currUser, content: e.target.value}
+      this.socket.send(JSON.stringify(enteredMessage));
+      e.target.value = "";
     }
   }
 }
