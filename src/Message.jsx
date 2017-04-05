@@ -15,4 +15,9 @@ class Message extends Component {
   }
 }
 
+Message.propTypes = {
+  username: React.PropTypes.string,
+  content: React.PropTypes.string
+}
+
 export default Message;

@@ -12,4 +12,9 @@ class ChatBar extends Component {
   }
 }
 
+ChatBar.propTypes = {
+  handleNewUsername: React.PropTypes.func,
+  handleNewContent: React.PropTypes.func
+}
+
 export default ChatBar;

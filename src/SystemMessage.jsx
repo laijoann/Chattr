@@ -10,4 +10,9 @@ class SystemMessage extends Component {
   }
 }
 
+SystemMessage.propTypes = {
+  prevUser: React.PropTypes.string,
+  newUser: React.PropTypes.string
+}
+
 export default SystemMessage;
