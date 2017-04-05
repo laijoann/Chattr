@@ -7,7 +7,8 @@ class App extends Component {
     super()
     this.state = {
       currentUser: { name: "Anonymous" },
-      messages: []
+      messages: [],
+      systemMessages: []
     }
   }
   componentDidMount() {
@@ -21,7 +22,11 @@ class App extends Component {
           this.setState({messages: messages});
           break;
         case 'username':
-          this.state.currentUser = { name: receivedMsg.text }
+          this.state.currentUser = { name: receivedMsg.text.newUser }
+          break;
+        case 'usernameSystemMsg':
+          const systemMessages = this.state.systemMessages.concat(receivedMsg.text)
+          this.setState({systemMessages: systemMessages})
           break;
       }
     }
@@ -30,7 +35,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <MessageList messages={this.state.messages}/>
+        <MessageList messages={this.state.messages} systemMessages={this.state.systemMessages} />
         <ChatBar name={this.state.currentUser.name} handleNewContent={this.handleNewContent.bind(this)} handleNewUsername={this.handleNewUsername.bind(this)}/>
       </div>
     );
@@ -52,7 +57,7 @@ class App extends Component {
       const enteredUsername = e.target.value
       const toSend = {
         type: 'username',
-        text: enteredUsername
+        text: { prevUser: this.state.currentUser.name, newUser: enteredUsername }
       }
       this.socket.send(JSON.stringify(toSend))
     }

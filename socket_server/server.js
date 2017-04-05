@@ -15,15 +15,17 @@ wss.on('connection', (ws) => {
   console.log('Client connected');
 
   ws.on('message', (message) => {
-    let received = JSON.parse(message)
+    let received = JSON.parse(message);
     switch (received.type) {
       case 'content':
         received.text['id'] = uuid.v4();
-        wss.broadcast(JSON.stringify(received))
+        wss.broadcast(JSON.stringify(received));
         break;
       case 'username':
-        console.log(received.text)
-        ws.send(JSON.stringify(received))
+        ws.send(JSON.stringify(received));
+        received.text['id'] = uuid.v4();
+        received.type = 'usernameSystemMsg'
+        wss.broadcast(JSON.stringify(received));
         break;
     }
   })
