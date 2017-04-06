@@ -2,7 +2,6 @@
 
 const express = require('express');
 const SocketServer = require('ws').Server;
-const uuid = require('uuid');
 const fetch = require('node-fetch');
 const querystring = require('querystring')
 
@@ -39,7 +38,6 @@ wss.on('connection', (ws) => {
 
   ws.on('message', (message) => {
     let received = JSON.parse(message);
-    received.text['id'] = uuid.v4();
     switch (received.type) {
       case 'content':
       case 'image':

@@ -3,6 +3,7 @@ import MessageList from './MessageList.jsx';
 import ChatBar from './ChatBar.jsx';
 import Nav from './Nav.jsx';
 const emoji = require('node-emoji');
+const uuid = require('uuid');
 
 class App extends Component {
   constructor() {
@@ -53,7 +54,12 @@ class App extends Component {
   }
   handleNewContent(e) {
     if (e.keyCode === 13) {
-      const enteredMessage = {username: this.state.currentUser, content: e.target.value, colour: this.state.clientColour}
+      const enteredMessage = {
+        username: this.state.currentUser,
+        content: e.target.value,
+        colour: this.state.clientColour,
+        id: uuid.v4()
+      }
       let toSend = {
         text: enteredMessage
       }
@@ -77,7 +83,7 @@ class App extends Component {
       const enteredUsername = e.target.value
       const toSend = {
         type: 'username',
-        text: { prevUser: this.state.currentUser, newUser: enteredUsername }
+        text: { prevUser: this.state.currentUser, newUser: enteredUsername, id: uuid.v4() }
       }
       this.socket.send(JSON.stringify(toSend))
     }
