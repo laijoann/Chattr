@@ -11,7 +11,7 @@ class MessageList extends Component {
 
   render() {
     return (
-      <main id="chat-messages" className="messages">
+      <main id='chat-messages' className='messages'>
       { this.props.messages.map( message => {
         switch (message.type) {
           case 'content':

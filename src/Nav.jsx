@@ -3,9 +3,9 @@ import React, {Component} from 'react';
 class ChatBar extends Component {
   render() {
     return (
-      <nav className="navbar">
-        <a href="/" className="navbar-brand">Chatty</a>
-        <span className="navbar-clientNum">{this.props.clientNum} users online</span>
+      <nav className='navbar'>
+        <a href='/' className='navbar-brand'>Chatty</a>
+        <span className='navbar-clientNum'>{this.props.clientNum} users online</span>
       </nav>
     )
   }
