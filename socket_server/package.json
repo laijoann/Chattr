@@ -12,5 +12,8 @@
   "dependencies": {
     "express": "4.15.2",
     "ws": "2.2.3"
+  },
+  "devDependencies": {
+    "json-loader": "^0.5.4"
   }
 }

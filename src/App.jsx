@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import MessageList from './MessageList.jsx';
 import ChatBar from './ChatBar.jsx';
 import Nav from './Nav.jsx';
-//const emoji = require('node-emoji'); //
+const emoji = require('node-emoji');
 
 class App extends Component {
   constructor() {
@@ -20,11 +20,15 @@ class App extends Component {
       const receivedMsg = JSON.parse(newMsg.data)
       switch (receivedMsg.type) {
         case 'content':
+          receivedMsg.text.content = emoji.emojify(receivedMsg.text.content)
+          const contMsg = this.state.messages.concat(receivedMsg)
+          this.setState({messages: contMsg})
+          break;
         case 'usernameSystemMsg':
         case 'giphy':
         case 'image':
-          var contMsg = this.state.messages.concat(receivedMsg)
-          this.setState({messages: contMsg})
+          const miscMsg = this.state.messages.concat(receivedMsg)
+          this.setState({messages: miscMsg})
           break;
         case 'username':
           this.setState({currentUser: receivedMsg.text.newUser})
