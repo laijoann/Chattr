@@ -9,7 +9,7 @@ class App extends Component {
     this.state = {
       clientNum: 0,
       clientColour: '#ffffff',
-      currentUser: { name: 'Anonymous' },
+      currentUser: 'Anonymous',
       messages: []
     }
   }
@@ -25,13 +25,13 @@ class App extends Component {
           this.setState({messages: contMsg})
           break;
         case 'username':
-          this.state.currentUser = {name: receivedMsg.text.newUser}
+          this.setState({currentUser: receivedMsg.text.newUser})
           break;
         case 'clientNum':
           this.setState({clientNum: receivedMsg.text})
           break;
         case 'userColour':
-          this.state.clientColour = receivedMsg.text
+          this.setState({clientColour: receivedMsg.text})
           break;
       }
     }
@@ -40,14 +40,14 @@ class App extends Component {
     return (
       <div>
         <Nav clientNum={this.state.clientNum} />
-        <MessageList messages={this.state.messages} colour={this.state.clientColour} systemMessages={this.state.systemMessages} />
-        <ChatBar name={this.state.currentUser.name} handleNewContent={this.handleNewContent.bind(this)} handleNewUsername={this.handleNewUsername.bind(this)}/>
+        <MessageList messages={this.state.messages} systemMessages={this.state.systemMessages} />
+        <ChatBar name={this.state.currentUser} handleNewContent={this.handleNewContent.bind(this)} handleNewUsername={this.handleNewUsername.bind(this)}/>
       </div>
     )
   }
   handleNewContent(e) {
     if (e.keyCode === 13) {
-      const enteredMessage = {username: this.state.currentUser.name, content: e.target.value}
+      const enteredMessage = {username: this.state.currentUser, content: e.target.value, colour: this.state.clientColour}
       let toSend = {
         text: enteredMessage
       }
@@ -68,7 +68,7 @@ class App extends Component {
       const enteredUsername = e.target.value
       const toSend = {
         type: 'username',
-        text: { prevUser: this.state.currentUser.name, newUser: enteredUsername }
+        text: { prevUser: this.state.currentUser, newUser: enteredUsername }
       }
       this.socket.send(JSON.stringify(toSend))
     }

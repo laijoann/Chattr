@@ -12,7 +12,7 @@ class MessageList extends Component {
           case 'content':
             return <Message
             key={message.text.id}
-            colour={this.props.colour}
+            colour={message.text.colour}
             username={message.text.username}
             content={message.text.content} />
           case 'usernameSystemMsg':
@@ -23,7 +23,7 @@ class MessageList extends Component {
           case 'giphy':
             return <GiphyMessage
             key={message.text.id}
-            colour={this.props.colour}
+            colour={message.text.colour}
             username={message.text.username}
             imageURL={message.text.content} />
         }
