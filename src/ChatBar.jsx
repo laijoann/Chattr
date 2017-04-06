@@ -4,7 +4,7 @@ class ChatBar extends Component {
 
   render() {
     return (
-      <footer id='chatbar' className='chatbar'>
+      <footer className='chatbar'>
         <input
           className='chatbar-username'
           placeholder='Anonymous'
