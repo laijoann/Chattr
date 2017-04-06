@@ -19,7 +19,7 @@
     "edit",
     "webpack"
   ],
-  "author": "Noah-Jerome Lotzer <n.lotzer@neusta.de>",
+  "author": "Joann Lai",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/laijoann/Chattr/issues"
@@ -49,6 +49,7 @@
   },
   "dependencies": {
     "express": "4.15.2",
+    "node-fetch": "^1.6.3",
     "node-uuid": "1.4.8",
     "react": "15.2.1",
     "react-dom": "15.2.1",

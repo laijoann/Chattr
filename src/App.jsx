@@ -17,6 +17,7 @@ class App extends Component {
       switch (receivedMsg.type) {
         case 'content':
         case 'usernameSystemMsg':
+        case 'giphy':
           const contMsg = this.state.messages.concat(receivedMsg)
           this.setState({messages: contMsg})
           break;
@@ -37,10 +38,18 @@ class App extends Component {
   handleNewContent(e) {
     if (e.keyCode === 13) {
       const enteredMessage = {username: this.state.currentUser.name, content: e.target.value}
-      const toSend = {
-        type: 'content',
+      let toSend = {
         text: enteredMessage
       }
+      if (e.target.value.match(/^\/gif (.+)$/)) {
+        const matches = /^\/gif (.+)$/.exec(e.target.value)
+        toSend.type = 'giphy'
+        toSend.text.content = matches[1]
+      } else {
+        toSend.type = 'content'
+        toSend.text.content = e.target.value
+      }
+      console.log('bout to send', toSend)
       this.socket.send(JSON.stringify(toSend));
       e.target.value = '';
     }
