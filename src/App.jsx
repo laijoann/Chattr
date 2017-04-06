@@ -4,6 +4,7 @@ import ChatBar from './ChatBar.jsx';
 import Nav from './Nav.jsx';
 const emoji = require('node-emoji');
 const uuid = require('uuid');
+const garfield = require('garfield');
 
 class App extends Component {
   constructor() {
@@ -40,6 +41,11 @@ class App extends Component {
         case 'userColour':
           this.setState({clientColour: receivedMsg.text})
           break;
+        case 'garfield':
+          receivedMsg.text.content = garfield.random();
+          const garfMsg = this.state.messages.concat(receivedMsg)
+          this.setState({messages: garfMsg})
+          break;
       }
     }
   }
@@ -56,7 +62,6 @@ class App extends Component {
     if (e.keyCode === 13) {
       const enteredMessage = {
         username: this.state.currentUser,
-        content: e.target.value,
         colour: this.state.clientColour,
         id: uuid.v4()
       }
@@ -70,6 +75,8 @@ class App extends Component {
       } else if (e.target.value.match(/(^[\S]*\.(\?\:jpg|jpeg|png|gif))/i)) {
         toSend.type = 'image'
         toSend.text.content = e.target.value
+      } else if (e.target.value.match(/^\/garfield$/)) {
+        toSend.type= 'garfield'
       } else {
         toSend.type = 'content'
         toSend.text.content = e.target.value

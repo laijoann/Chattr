@@ -38,6 +38,7 @@ class MessageList extends Component {
             newUser={message.text.newUser} />
           case 'giphy':
           case 'image':
+          case 'garfield':
             return <GiphyMessage
             key={message.text.id}
             colour={message.text.colour}

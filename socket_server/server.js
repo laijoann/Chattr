@@ -41,6 +41,7 @@ wss.on('connection', (ws) => {
     switch (received.type) {
       case 'content':
       case 'image':
+      case 'garfield':
         wss.broadcast(JSON.stringify(received));
         break;
       case 'username':
