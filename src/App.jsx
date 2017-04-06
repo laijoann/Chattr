@@ -21,6 +21,7 @@ class App extends Component {
         case 'content':
         case 'usernameSystemMsg':
         case 'giphy':
+        case 'image':
           var contMsg = this.state.messages.concat(receivedMsg)
           this.setState({messages: contMsg})
           break;
@@ -55,6 +56,9 @@ class App extends Component {
         const matches = /^\/gif (.+)$/.exec(e.target.value)
         toSend.type = 'giphy'
         toSend.text.content = matches[1]
+      } else if (e.target.value.match(/(^[\S]*\.(\?\:jpg|jpeg|png|gif))/i)) {
+        toSend.type = 'image'
+        toSend.text.content = e.target.value
       } else {
         toSend.type = 'content'
         toSend.text.content = e.target.value

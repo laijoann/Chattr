@@ -4,9 +4,14 @@ import SystemMessage from './SystemMessage.jsx';
 import GiphyMessage from './Giphy.jsx';
 
 class MessageList extends Component {
+  componentDidUpdate(prevProps) {
+    console.log(prevProps.messages.length, this.props.messages.length)
+
+  }
+
   render() {
     return (
-      <main className="messages">
+      <main id="chat-messages" className="messages">
       { this.props.messages.map( message => {
         switch (message.type) {
           case 'content':
@@ -21,14 +26,14 @@ class MessageList extends Component {
             prevUser={message.text.prevUser}
             newUser={message.text.newUser} />
           case 'giphy':
+          case 'image':
             return <GiphyMessage
             key={message.text.id}
             colour={message.text.colour}
             username={message.text.username}
             imageURL={message.text.content} />
         }
-
-     })}
+      })}
       </main>
     )
   }

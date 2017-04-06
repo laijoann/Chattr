@@ -42,6 +42,7 @@ wss.on('connection', (ws) => {
     received.text['id'] = uuid.v4();
     switch (received.type) {
       case 'content':
+      case 'image':
         wss.broadcast(JSON.stringify(received));
         break;
       case 'username':

@@ -4,11 +4,6 @@ class ChatBar extends Component {
 
 
   render() {
-
-      // const divStyle = {
-      //   color: {this.props.colour}
-      // };
-
     return (
       <footer className='chatbar'>
         <input
