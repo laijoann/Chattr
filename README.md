@@ -5,6 +5,6 @@ Chattr is primarily a client-side SPA (single-page app) built with ReactJS. It c
 
 ## Features
 
-- use command /gif <query> to get a random gif from giphy
-- :<emoji-command>: to use emojis
+- use command /gif _keyword_ to get a random gif from giphy
+- :_emoji-command_: to use emojis
 - display images when image links are entered
