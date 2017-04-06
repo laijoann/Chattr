@@ -4,7 +4,8 @@ class SystemMessage extends Component {
   render() {
     return (
       <div className="giphyMessage">
-        <span className ="message-username">
+        <span className ="message-username"
+          style={{color: this.props.colour}}>
           {this.props.username}
         </span>
         <span className="message-content">
@@ -17,7 +18,8 @@ class SystemMessage extends Component {
 
 SystemMessage.propTypes = {
   imageURL: React.PropTypes.string,
-  username: React.PropTypes.string
+  username: React.PropTypes.string,
+  colour: React.PropTypes.string
 }
 
 export default SystemMessage;

@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import MessageList from './MessageList.jsx';
-import ChatBar from './ChatBar.jsx'
+import ChatBar from './ChatBar.jsx';
+import Nav from './Nav.jsx';
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
+      clientNum: 0,
+      clientColour: '#ffffff',
       currentUser: { name: 'Anonymous' },
       messages: []
     }
@@ -18,11 +21,17 @@ class App extends Component {
         case 'content':
         case 'usernameSystemMsg':
         case 'giphy':
-          const contMsg = this.state.messages.concat(receivedMsg)
+          var contMsg = this.state.messages.concat(receivedMsg)
           this.setState({messages: contMsg})
           break;
         case 'username':
-          this.state.currentUser = { name: receivedMsg.text.newUser }
+          this.state.currentUser = {name: receivedMsg.text.newUser}
+          break;
+        case 'clientNum':
+          this.setState({clientNum: receivedMsg.text})
+          break;
+        case 'userColour':
+          this.state.clientColour = receivedMsg.text
           break;
       }
     }
@@ -30,7 +39,8 @@ class App extends Component {
   render() {
     return (
       <div>
-        <MessageList messages={this.state.messages} systemMessages={this.state.systemMessages} />
+        <Nav clientNum={this.state.clientNum} />
+        <MessageList messages={this.state.messages} colour={this.state.clientColour} systemMessages={this.state.systemMessages} />
         <ChatBar name={this.state.currentUser.name} handleNewContent={this.handleNewContent.bind(this)} handleNewUsername={this.handleNewUsername.bind(this)}/>
       </div>
     )
@@ -49,7 +59,6 @@ class App extends Component {
         toSend.type = 'content'
         toSend.text.content = e.target.value
       }
-      console.log('bout to send', toSend)
       this.socket.send(JSON.stringify(toSend));
       e.target.value = '';
     }

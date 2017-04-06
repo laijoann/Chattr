@@ -10,11 +10,22 @@ class MessageList extends Component {
       { this.props.messages.map( message => {
         switch (message.type) {
           case 'content':
-            return <Message key={message.text.id} username={message.text.username} content={message.text.content} />
+            return <Message
+            key={message.text.id}
+            colour={this.props.colour}
+            username={message.text.username}
+            content={message.text.content} />
           case 'usernameSystemMsg':
-            return <SystemMessage key={message.text.id} prevUser={message.text.prevUser} newUser={message.text.newUser} />
+            return <SystemMessage
+            key={message.text.id}
+            prevUser={message.text.prevUser}
+            newUser={message.text.newUser} />
           case 'giphy':
-            return <GiphyMessage key={message.text.id} username={message.text.username} imageURL={message.text.content} />
+            return <GiphyMessage
+            key={message.text.id}
+            colour={this.props.colour}
+            username={message.text.username}
+            imageURL={message.text.content} />
         }
 
      })}
@@ -24,7 +35,8 @@ class MessageList extends Component {
 }
 
 MessageList.propTypes = {
-  messages: React.PropTypes.array
+  messages: React.PropTypes.array,
+  colour: React.PropTypes.string
 }
 
 export default MessageList;

@@ -1,12 +1,21 @@
 import React, {Component} from 'react';
 
 class ChatBar extends Component {
+
+
   render() {
+
+      // const divStyle = {
+      //   color: {this.props.colour}
+      // };
+
     return (
-      <footer className="chatbar">
-      <input className="chatbar-username" placeholder="Anonymous"
-      onKeyUp={this.props.handleNewUsername} />
-      <input className="chatbar-message" placeholder="Type a message and hit ENTER" onKeyUp={this.props.handleNewContent}/>
+      <footer className='chatbar'>
+        <input
+          className='chatbar-username'
+          placeholder='Anonymous'
+          onKeyUp={this.props.handleNewUsername} />
+        <input className='chatbar-message' placeholder='Type a message and hit ENTER' onKeyUp={this.props.handleNewContent}/>
       </footer>
     )
   }
@@ -14,7 +23,8 @@ class ChatBar extends Component {
 
 ChatBar.propTypes = {
   handleNewUsername: React.PropTypes.func,
-  handleNewContent: React.PropTypes.func
+  handleNewContent: React.PropTypes.func,
+  colour: React.PropTypes.string
 }
 
 export default ChatBar;
