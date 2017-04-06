@@ -6,10 +6,19 @@ import GiphyMessage from './Giphy.jsx';
 class MessageList extends Component {
 
   componentDidUpdate(prevProps) {
-    if (!(prevProps.messages.length ===this.props.messages.length)) {
+    const scroll = () => {
       window.scrollTo(0, (document.body.scrollHeight));
     }
-  }
+    if (!(prevProps.messages.length ===this.props.messages.length)) {
+      try {
+        const images = document.querySelectorAll('img');
+        const img = images[images.length - 1]
+        img.complete ? scroll() : img.addEventListener('load', scroll)
+      } catch(err) {
+        scroll()
+      }
+    }
+  } //auto-scrolls to the latest message
 
   render() {
     return (

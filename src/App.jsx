@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import MessageList from './MessageList.jsx';
 import ChatBar from './ChatBar.jsx';
 import Nav from './Nav.jsx';
+//const emoji = require('node-emoji'); //
 
 class App extends Component {
   constructor() {
