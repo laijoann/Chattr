@@ -4,14 +4,16 @@ import SystemMessage from './SystemMessage.jsx';
 import GiphyMessage from './Giphy.jsx';
 
 class MessageList extends Component {
-  componentDidUpdate(prevProps) {
-    console.log(prevProps.messages.length, this.props.messages.length)
 
+  componentDidUpdate(prevProps) {
+    if (!(prevProps.messages.length ===this.props.messages.length)) {
+      window.scrollTo(0, (document.body.scrollHeight));
+    }
   }
 
   render() {
     return (
-      <main id='chat-messages' className='messages'>
+      <main className='messages'>
       { this.props.messages.map( message => {
         switch (message.type) {
           case 'content':
