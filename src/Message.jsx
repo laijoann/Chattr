@@ -1,25 +1,21 @@
-import React, {Component} from 'react';
+import React, {PropTypes} from 'react'
 
-class Message extends Component {
-  render() {
-    return (
-      <div className='message'>
-        <span className ='message-username'
-          style={{color: this.props.colour}}>
-          {this.props.username}
-        </span>
-        <span className='message-content'>
-          {this.props.content}
-        </span>
-      </div>
-    )
-  }
-}
+const Message = (props) => (
+  <div className='message'>
+    <span className ='message-username'
+      style={{color: props.colour}}>
+      {props.username}
+    </span>
+    <span className='message-content'>
+      {props.content}
+    </span>
+  </div>
+)
 
 Message.propTypes = {
-  username: React.PropTypes.string,
-  content: React.PropTypes.string,
-  colour: React.PropTypes.string
+  username: PropTypes.string,
+  content: PropTypes.string,
+  colour: PropTypes.string
 }
 
-export default Message;
+export default Message

@@ -1,18 +1,19 @@
-/* TODO: change IP (172.46.3.111 at LHL)*/
-
-const express = require('express');
-const SocketServer = require('ws').Server;
-const fetch = require('node-fetch');
+const express = require('express')
+const SocketServer = require('ws').Server
+const fetch = require('node-fetch')
 const querystring = require('querystring')
 
-const PORT = 3001;
+const IP = '172.46.3.111' //
+
+const PORT = 3001
+const giphyAPIKey = 'dc6zaTOxFJmzC'
 
 const server = express()
    // Make the express server serve static assets (html, javascript, css) from the /public folder
   .use(express.static('public'))
-  .listen(PORT, '0.0.0.0', '172.46.3.111', () => console.log(`Listening on ${ PORT }`));
+  .listen(PORT, '0.0.0.0', IP, () => console.log(`Listening on ${ PORT }`))
 
-const wss = new SocketServer({ server });
+const wss = new SocketServer({ server })
 
 const getRandomColor = () => {
     const letters = '0123456789ABCDEF';
@@ -24,7 +25,7 @@ const getRandomColor = () => {
 }
 
 wss.on('connection', (ws) => {
-  console.log('Client connected');
+  console.log('Client connected')
   ws.send(JSON.stringify({
     type: 'userColour',
     text: getRandomColor()
@@ -37,40 +38,41 @@ wss.on('connection', (ws) => {
   ))
 
   ws.on('message', (message) => {
-    let received = JSON.parse(message);
+    let received = JSON.parse(message)
     switch (received.type) {
       case 'content':
       case 'image':
       case 'garfield':
-        wss.broadcast(JSON.stringify(received));
-        break;
+
+        wss.broadcast(JSON.stringify(received))
+        break
       case 'username':
-        ws.send(JSON.stringify(received));
+        ws.send(JSON.stringify(received))
         received.type = 'usernameSystemMsg'
-        wss.broadcast(JSON.stringify(received));
-        break;
+        wss.broadcast(JSON.stringify(received))
+        break
       case 'giphy':
         let searchTerms = querystring.stringify({
-          api_key: 'dc6zaTOxFJmzC',
+          api_key: giphyAPIKey,
           tag: received.text.content
         })
         fetch(`http://api.giphy.com/v1/gifs/random?${searchTerms}`)
           .then( resp => { return resp.json()})
           .then( json => {
-            received.text.content = json.data.image_url;
+            received.text.content = json.data.image_url
             wss.broadcast(JSON.stringify(received))
           })
           .catch(console.error)
-        break;
+        break
 
     }
   })
 
-  ws.on('close', () => console.log('Client disconnected'));
-});
+  ws.on('close', () => console.log('Client disconnected'))
+})
 
 wss.broadcast = function(data) {
   wss.clients.forEach(function(client) {
-    client.send(data);
+    client.send(data)
   })
 }

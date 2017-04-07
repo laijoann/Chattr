@@ -1,20 +1,17 @@
-import React, {Component} from 'react';
-import MessageList from './MessageList.jsx';
-import ChatBar from './ChatBar.jsx';
-import Nav from './Nav.jsx';
-const emoji = require('node-emoji');
-const uuid = require('uuid');
-const garfield = require('garfield');
+import React, {Component} from 'react'
+import MessageList from './MessageList.jsx'
+import ChatBar from './ChatBar.jsx'
+import Nav from './Nav.jsx'
+import emoji from 'node-emoji'
+import uuid from 'uuid'
+import garfield from 'garfield'
 
 class App extends Component {
-  constructor() {
-    super()
-    this.state = {
-      clientNum: 0,
-      clientColour: '#ffffff',
-      currentUser: 'Anonymous',
-      messages: []
-    }
+  state = {
+    clientNum: 0,
+    clientColour: '#ffffff',
+    currentUser: 'Anonymous',
+    messages: []
   }
   componentDidMount() {
     this.socket = new WebSocket('ws://172.46.3.111:3001')
@@ -25,27 +22,27 @@ class App extends Component {
           receivedMsg.text.content = emoji.emojify(receivedMsg.text.content)
           const contMsg = this.state.messages.concat(receivedMsg)
           this.setState({messages: contMsg})
-          break;
+          break
         case 'usernameSystemMsg':
         case 'giphy':
         case 'image':
           const miscMsg = this.state.messages.concat(receivedMsg)
           this.setState({messages: miscMsg})
-          break;
+          break
         case 'username':
           this.setState({currentUser: receivedMsg.text.newUser})
-          break;
+          break
         case 'clientNum':
           this.setState({clientNum: receivedMsg.text})
-          break;
+          break
         case 'userColour':
           this.setState({clientColour: receivedMsg.text})
-          break;
+          break
         case 'garfield':
-          receivedMsg.text.content = garfield.random();
+          receivedMsg.text.content = garfield.random()
           const garfMsg = this.state.messages.concat(receivedMsg)
           this.setState({messages: garfMsg})
-          break;
+          break
       }
     }
   }
@@ -81,8 +78,8 @@ class App extends Component {
         toSend.type = 'content'
         toSend.text.content = e.target.value
       }
-      this.socket.send(JSON.stringify(toSend));
-      e.target.value = '';
+      this.socket.send(JSON.stringify(toSend))
+      e.target.value = ''
     }
   }
   handleNewUsername(e) {
@@ -96,4 +93,4 @@ class App extends Component {
     }
   }
 }
-export default App;
+export default App

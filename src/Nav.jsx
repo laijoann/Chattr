@@ -1,20 +1,16 @@
-import React, {Component} from 'react';
+import React, {PropTypes} from 'react'
 
-class ChatBar extends Component {
-  render() {
-    return (
-      <nav className='navbar'>
-        <a href='/' className='navbar-brand'>Chatty</a>
-        <span className='navbar-clientNum'>{this.props.clientNum} users online</span>
-      </nav>
-    )
-  }
+const NavBar = (props) => (
+  <nav className='navbar'>
+    <a href='/' className='navbar-brand'>Chatty</a>
+    <span className='navbar-clientNum'>{props.clientNum} users online</span>
+  </nav>
+)
+
+NavBar.propTypes = {
+  handleNewUsername: PropTypes.func,
+  handleNewContent: PropTypes.func,
+  clientNum: PropTypes.number
 }
 
-ChatBar.propTypes = {
-  handleNewUsername: React.PropTypes.func,
-  handleNewContent: React.PropTypes.func,
-  clientNum: React.PropTypes.number
-}
-
-export default ChatBar;
+export default NavBar

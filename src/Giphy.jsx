@@ -1,26 +1,21 @@
-import React, {Component} from 'react';
+import React, {PropTypes} from 'react'
 
-class SystemMessage extends Component {
-
-  render() {
-    return (
-      <div className='message'>
-        <span className ='message-username'
-          style={{color: this.props.colour}}>
-          {this.props.username}
-        </span>
-        <span className='message-content'>
-          <img src={this.props.imageURL} alt = '' />
-        </span>
-      </div>
-    )
-  }
-}
+const SystemMessage = (props) => (
+  <div className='message'>
+    <span className ='message-username'
+      style={{color: props.colour}}>
+      {props.username}
+    </span>
+    <span className='message-content'>
+      <img src={props.imageURL} alt = '' />
+    </span>
+  </div>
+)
 
 SystemMessage.propTypes = {
-  imageURL: React.PropTypes.string,
-  username: React.PropTypes.string,
-  colour: React.PropTypes.string
+  imageURL: PropTypes.string,
+  username: PropTypes.string,
+  colour: PropTypes.string
 }
 
-export default SystemMessage;
+export default SystemMessage

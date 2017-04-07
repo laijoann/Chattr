@@ -1,17 +1,17 @@
-import React, {Component} from 'react';
-import Message from './Message.jsx';
-import SystemMessage from './SystemMessage.jsx';
-import GiphyMessage from './Giphy.jsx';
+import React, {PropTypes, Component} from 'react'
+import Message from './Message.jsx'
+import SystemMessage from './SystemMessage.jsx'
+import GiphyMessage from './Giphy.jsx'
 
 class MessageList extends Component {
 
   componentDidUpdate(prevProps) {
     const scroll = () => {
-      window.scrollTo(0, (document.body.scrollHeight));
+      window.scrollTo(0, (document.body.scrollHeight))
     }
     if (!(prevProps.messages.length ===this.props.messages.length)) {
       try {
-        const images = document.querySelectorAll('img');
+        const images = document.querySelectorAll('img')
         const img = images[images.length - 1]
         img.complete ? scroll() : img.addEventListener('load', scroll)
       } catch(err) {
@@ -52,8 +52,8 @@ class MessageList extends Component {
 }
 
 MessageList.propTypes = {
-  messages: React.PropTypes.array,
-  colour: React.PropTypes.string
+  messages: PropTypes.array,
+  colour: PropTypes.string
 }
 
-export default MessageList;
+export default MessageList

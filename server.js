@@ -1,6 +1,8 @@
-const webpack = require('webpack');
-const WebpackDevServer = require('webpack-dev-server');
-const config = require('./webpack.config');
+const webpack = require('webpack')
+const WebpackDevServer = require('webpack-dev-server')
+const config = require('./webpack.config')
+
+const IP = '172.46.3.111'
 
 new WebpackDevServer(webpack(config), {
     publicPath: config.output.publicPath,
@@ -9,10 +11,10 @@ new WebpackDevServer(webpack(config), {
       poll: 1000
     }
   })
-  .listen(3000, '0.0.0.0', '172.46.3.111', function (err, result) {
+  .listen(3000, '0.0.0.0', IP, function (err, result) {
     if (err) {
-      console.log(err);
+      console.log(err)
     }
 
-    console.log('Running at http://0.0.0.0:3000');
-  });
+    console.log('Running at http://0.0.0.0:3000')
+  })
