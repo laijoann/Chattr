@@ -2,7 +2,7 @@ const webpack = require('webpack')
 const WebpackDevServer = require('webpack-dev-server')
 const config = require('./webpack.config')
 
-const IP = '172.46.3.111'
+const IP = '192.168.1.199'//'172.46.3.111'
 
 new WebpackDevServer(webpack(config), {
     publicPath: config.output.publicPath,
