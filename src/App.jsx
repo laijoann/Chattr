@@ -53,7 +53,7 @@ class App extends Component {
       </div>
     )
   }
-  handleNewContent(e) {
+  handleNewContent = (e) => {
     if (e.keyCode === 13) {
       const enteredMessage = {
         username: this.state.currentUser,
@@ -81,7 +81,7 @@ class App extends Component {
       e.target.value = ''
     }
   }
-  handleNewUsername(e) {
+  handleNewUsername = (e) => {
     if (e.keyCode === 13) {
       const enteredUsername = e.target.value
       const toSend = {
