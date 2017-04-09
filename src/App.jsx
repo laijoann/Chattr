@@ -6,6 +6,8 @@ import emoji from 'node-emoji'
 import uuid from 'uuid'
 import garfield from 'garfield'
 
+const IP = '192.168.1.199'
+
 class App extends Component {
   state = {
     clientNum: 0,
@@ -14,7 +16,7 @@ class App extends Component {
     messages: []
   }
   componentDidMount() {
-    this.socket = new WebSocket('ws://172.46.3.111:3001')
+    this.socket = new WebSocket(`ws://${IP}:3001`)
     this.socket.onmessage = (newMsg) => {
       const receivedMsg = JSON.parse(newMsg.data)
       switch (receivedMsg.type) {
@@ -26,6 +28,7 @@ class App extends Component {
         case 'usernameSystemMsg':
         case 'giphy':
         case 'image':
+        case 'garfield':
           const miscMsg = this.state.messages.concat(receivedMsg)
           this.setState({messages: miscMsg})
           break
@@ -37,11 +40,6 @@ class App extends Component {
           break
         case 'userColour':
           this.setState({clientColour: receivedMsg.text})
-          break
-        case 'garfield':
-          receivedMsg.text.content = garfield.random()
-          const garfMsg = this.state.messages.concat(receivedMsg)
-          this.setState({messages: garfMsg})
           break
       }
     }
@@ -74,6 +72,7 @@ class App extends Component {
         toSend.text.content = e.target.value
       } else if (e.target.value.match(/^\/garfield$/)) {
         toSend.type= 'garfield'
+        toSend.text.content = garfield.random()
       } else {
         toSend.type = 'content'
         toSend.text.content = e.target.value

@@ -3,7 +3,7 @@ const SocketServer = require('ws').Server
 const fetch = require('node-fetch')
 const querystring = require('querystring')
 
-const IP = '172.46.3.111' //
+const IP = '192.168.1.199'//'172.46.3.111'
 
 const PORT = 3001
 const giphyAPIKey = 'dc6zaTOxFJmzC'
@@ -16,13 +16,10 @@ const server = express()
 const wss = new SocketServer({ server })
 
 const getRandomColor = () => {
-    const letters = '0123456789ABCDEF';
-    let colour = '#';
-    for (let i = 0; i < 6; i++ ) {
-        colour += letters[Math.floor(Math.random() * 16)];
-    }
-    return colour;
+  const hex = Math.floor(Math.random() * 0x1000000).toString(16)
+  return `#${Array(7 - hex.length).join('0')}${hex}`
 }
+//when es7 becomes available: //return `#${Math.floor(Math.random() * 0x1000000).toString(16).padStart(6, '0')}`
 
 wss.on('connection', (ws) => {
   console.log('Client connected')
