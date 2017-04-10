@@ -11,4 +11,4 @@ new WebpackDevServer(webpack(config), {
       poll: 1000
     }
   })
-  .listen('https://joann-chattr.herokuapp.com/')
+  .listen(process.env.PORT || 3000)
