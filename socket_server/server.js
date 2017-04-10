@@ -4,14 +4,14 @@ const fetch = require('node-fetch')
 const querystring = require('querystring')
 
 //const IP = 'localhost'//'172.46.3.111'
+//const PORT = 3001
 
-const PORT = 3001
 const giphyAPIKey = 'dc6zaTOxFJmzC'
 
 const server = express()
    // Make the express server serve static assets (html, javascript, css) from the /public folder
   .use(express.static('public'))
-  .listen(process.env.PORT || PORT)
+  .listen('wss://myappname.herokuapp.com/')
 
 const wss = new SocketServer({ server })
 

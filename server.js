@@ -11,4 +11,4 @@ new WebpackDevServer(webpack(config), {
       poll: 1000
     }
   })
-  .listen(process.env.PORT || 3000)
+  .listen('wss://myappname.herokuapp.com/')
