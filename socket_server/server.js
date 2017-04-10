@@ -11,7 +11,7 @@ const giphyAPIKey = 'dc6zaTOxFJmzC'
 const server = express()
    // Make the express server serve static assets (html, javascript, css) from the /public folder
   .use(express.static('public'))
-  .listen('wss://myappname.herokuapp.com/')
+  .listen('wss://joann-chattr.herokuapp.com/')
 
 const wss = new SocketServer({ server })
 
