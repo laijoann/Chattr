@@ -53,7 +53,7 @@ wss.on('connection', (ws) => {
           api_key: giphyAPIKey,
           tag: received.text.content
         })
-        fetch(`http://api.giphy.com/v1/gifs/random?${searchTerms}`)
+        fetch(`https://api.giphy.com/v1/gifs/random?${searchTerms}`)
           .then( resp => { return resp.json()})
           .then( json => {
             received.text.content = json.data.image_url
