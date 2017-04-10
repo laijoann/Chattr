@@ -4,9 +4,7 @@
   "description": "A chat app using React",
   "scripts": {
     "lint": "eslint src",
-    "start-react": "node server.js",
-    "start-websocket": "node ./socket_server/server.js",
-    "dev": "npm run start-react | npm run start-websocket"
+    "start": "node server.js | node ./socket_server/server.js"
   },
   "repository": {
     "type": "git",
