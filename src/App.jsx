@@ -17,7 +17,8 @@ class App extends Component {
     messages: []
   }
   componentDidMount() {
-    this.socket = new WebSocket(`wss://joann-chattr.herokuapp.com/`)
+    this.socket = new WebSocket(location.origin.replace(/^http/, 'wss'))
+    // (`wss://joann-chattr.herokuapp.com/`)
     this.socket.onmessage = (newMsg) => {
       const receivedMsg = JSON.parse(newMsg.data)
       switch (receivedMsg.type) {
