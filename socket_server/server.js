@@ -3,7 +3,7 @@ const SocketServer = require('ws').Server
 const fetch = require('node-fetch')
 const querystring = require('querystring')
 
-const IP = 'localhost'//'172.46.3.111'
+//const IP = 'localhost'//'172.46.3.111'
 
 const PORT = 3001
 const giphyAPIKey = 'dc6zaTOxFJmzC'
@@ -11,7 +11,7 @@ const giphyAPIKey = 'dc6zaTOxFJmzC'
 const server = express()
    // Make the express server serve static assets (html, javascript, css) from the /public folder
   .use(express.static('public'))
-  .listen(process.env.PORT || PORT, '0.0.0.0', IP, () => console.log(`Listening on ${ PORT }`))
+  .listen(process.env.PORT || PORT)
 
 const wss = new SocketServer({ server })
 
