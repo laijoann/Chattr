@@ -11,4 +11,4 @@ new WebpackDevServer(webpack(config), {
       poll: 1000
     }
   })
-  .listen('wss://joann-chattr.herokuapp.com/')
+  .listen('https://joann-chattr.herokuapp.com/')
