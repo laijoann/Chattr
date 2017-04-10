@@ -3,7 +3,7 @@ const SocketServer = require('ws').Server
 const fetch = require('node-fetch')
 const querystring = require('querystring')
 
-const IP = '192.168.1.199'//'172.46.3.111'
+const IP = 'localhost'//'172.46.3.111'
 
 const PORT = 3001
 const giphyAPIKey = 'dc6zaTOxFJmzC'

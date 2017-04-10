@@ -6,7 +6,7 @@ import emoji from 'node-emoji'
 import uuid from 'uuid'
 import garfield from 'garfield'
 
-const IP = '192.168.1.199'
+const IP = 'localhost'
 
 class App extends Component {
   state = {
