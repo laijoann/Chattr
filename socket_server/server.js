@@ -11,7 +11,7 @@ const giphyAPIKey = 'dc6zaTOxFJmzC'
 const server = express()
    // Make the express server serve static assets (html, javascript, css) from the /public folder
   .use(express.static('public'))
-  .listen(PORT, '0.0.0.0', IP, () => console.log(`Listening on ${ PORT }`))
+  .listen(process.env.PORT || PORT, '0.0.0.0', IP, () => console.log(`Listening on ${ PORT }`))
 
 const wss = new SocketServer({ server })
 

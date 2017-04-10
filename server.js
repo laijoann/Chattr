@@ -11,7 +11,7 @@ new WebpackDevServer(webpack(config), {
       poll: 1000
     }
   })
-  .listen(3000, '0.0.0.0', IP, function (err, result) {
+  .listen(process.env.PORT || 3000, '0.0.0.0', IP, function (err, result) {
     if (err) {
       console.log(err)
     }

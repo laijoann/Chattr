@@ -7,6 +7,7 @@ import uuid from 'uuid'
 import garfield from 'garfield'
 
 const IP = 'localhost'
+const PORT = process.env.PORT || 3001
 
 class App extends Component {
   state = {
@@ -16,7 +17,7 @@ class App extends Component {
     messages: []
   }
   componentDidMount() {
-    this.socket = new WebSocket(`ws://${IP}:3001`)
+    this.socket = new WebSocket(`ws://${IP}:${PORT}`)
     this.socket.onmessage = (newMsg) => {
       const receivedMsg = JSON.parse(newMsg.data)
       switch (receivedMsg.type) {
