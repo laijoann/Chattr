@@ -1,12 +1,14 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css");
 
+$skyblue: #91b6f2;
+$white: white;
 
 h1 {
-  color: tomato;
+  color: $skyblue;
 }
 body {
-  background: white;
+  background: $white;
   color: black;
   font-family: 'Open Sans', sans-serif;
   font-size: 14px;
@@ -17,8 +19,7 @@ img {
 }
 
 .chatbar {
-  background: tomato;
-  border-top: 1px solid black;
+  background: $skyblue;
   bottom: 0;
   display: flex;
   left: 0;
@@ -29,7 +30,6 @@ img {
 
 .chatbar-message,
 .chatbar-username {
-  border: 1px solid black;
   display: block;
   height: 40px;
   line-height: 40px;
@@ -72,8 +72,7 @@ img {
 }
 
 .navbar {
-  background: tomato;
-  border-bottom: 1px solid black;
+  background: $skyblue;
   height: 60px;
   left: 0;
   padding: 0 10px;
@@ -83,7 +82,7 @@ img {
 }
 
 .navbar-brand {
-  color: inherit;
+  color: $white;
   display: block;
   float: left;
   font-weight: 700;
@@ -95,7 +94,7 @@ img {
 }
 
 .navbar-clientNum {
-  color: inherit;
+  color: $white;
   display: block;
   float: right;
   font-weight: 400;
